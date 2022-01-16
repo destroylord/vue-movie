@@ -45,7 +45,7 @@ export default {
             </div>
             <div class="col-xl-4">
               <div class="card">
-                <h1>Spiderman Anger</h1>
+                <h1>Spiderman Angers</h1>
                 <div class="card-body">
                       Lorem, ipsum dolor sit amet consectetur adipisicing elit. Commodi non ea dolor, amet, tempora aliquam facere voluptatibus iusto odit corporis doloremque! Dolorum molestias qui fugit recusandae natus vitae omnis dolor.
                   </div>
