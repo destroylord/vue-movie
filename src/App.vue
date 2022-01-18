@@ -1,11 +1,35 @@
 <script>
+
+import axios from 'axios';
+
+
+const API_KEY = "31e5eb9290c792961bc23531c8cc8cf0";
+
 export default {
+
 
   data() {
     return {
-      search : ''
+      search : '',
+      movie: [],
+      errored: false,
+      loading: true
     }
+  },
+
+  mounted() {
+    axios
+      .get("https://api.themoviedb.org/3/trending/all/day?api_key="+API_KEY)
+      .then(response => (
+        this.movie = response.data.results))
+      .catch(error => {
+        console.log(error)
+        this.errored = true
+      })
+      .finally(() =>
+      this.loading = false)
   }
+  
 }
 
 </script>
@@ -15,32 +39,25 @@ export default {
   <input type="text" v-model="search">
     <h1>Search: {{search}}</h1>
 
+
     <section id="feature">
         <div class="container-fluid">
           <div class="row">
             <div class="col-xl-8">
               <div class="row">
-                <div class="col-xl-4">
-                  <div class="card">
+                <div class="col-xl-4" v-for="item in movie" :key="item">
+                  <div class="card mt-2">
+                    <div class="card-header">
+                        <h6>{{item.original_title}}</h6>
+                    </div>
                     <div class="card-body">
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum culpa ut similique commodi officiis assumenda, omnis a dicta, possimus eligendi ipsum ratione molestias dolorum, porro ipsa minima? Quia, odit ratione?
+                      {{item.overview}}
+
+                      {{item.vote_count}}
                     </div>
                   </div>
                 </div>
-                <div class="col-xl-4">
-                  <div class="card">
-                    <div class="card-body">
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum culpa ut similique commodi officiis assumenda, omnis a dicta, possimus eligendi ipsum ratione molestias dolorum, porro ipsa minima? Quia, odit ratione?
-                    </div>
-                  </div>
-                </div>
-                <div class="col-xl-4">
-                  <div class="card">
-                    <div class="card-body">
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum culpa ut similique commodi officiis assumenda, omnis a dicta, possimus eligendi ipsum ratione molestias dolorum, porro ipsa minima? Quia, odit ratione?
-                    </div>
-                  </div>
-                </div>
+
               </div>
             </div>
             <div class="col-xl-4">
